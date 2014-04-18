@@ -19,23 +19,20 @@
     <body>
         <h1>Hello World!</h1>
         <% 
-//            j = 3;
-            for (int i=0; i<100; i++) {
-                out.print(i + "<br>");
-            }
             // TODO Auto-generated method stub
 		Class.forName("com.mysql.jdbc.Driver");
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test",
+			Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
 					"root", "pkueecs2014");
 			Statement stat = conn.createStatement();
-			ResultSet rs = stat.executeQuery("select * from friend");
+			ResultSet rs = stat.executeQuery("select * from account");
 			
 //			it prints out desired result correctly, cheers!
 //                        runs successfullly, haha
                         out.print("Here is the output from MySQL database<br>");
 			while (rs.next()) {
-				out.println(rs.getInt(1)+" "+rs.getInt(2) + "<br>");
+				out.println(rs.getString("userID") + " " + rs.getString("passwd")
+                                + " " + rs.getString("sex") + rs.getString("birthday") + "<br>");
 			} // end while loop
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
