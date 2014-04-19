@@ -64,7 +64,7 @@
 		//取得结果
 		ResultSet rs = stmt.executeQuery(sql);
 		if (rs.next()){
-                        out.println("correct password: " + rs.getString("passwd"));
+//                        out.println("correct password: " + rs.getString("passwd"));
 			if (rs.getString("passwd").equals(passwd)){
 				ok=1;
 				session.setAttribute("login","ok");
