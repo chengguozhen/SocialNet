@@ -13,13 +13,13 @@ create table if not exists `account` (
 	userName char(64) not null,
 	sex char(8) not null,
 	birthday date not null	
-);
+) default charset=utf8;;
 
 -- create table for friends
 create table if not exists `friend` (
 	userID1 char(32) not null,
 	userID2 char(32) not null
-);
+) default charset=utf8;;
 
 -- create table for messages
 create table if not exists `message` (
@@ -27,7 +27,7 @@ create table if not exists `message` (
 	userID char(32) not null,
 	publishTime datetime not null,
 	content char(140) not null	
-);
+) default charset=utf8;;
 
 -- create table for comments
 create table if not exists `comment` (
@@ -40,8 +40,9 @@ create table if not exists `comment` (
 
 -- insert some data into databases for purpose of debugging
 insert into `account` values ('wang@pku.edu.cn', '123', 'wangliang', 'M', '1992-1-19');
-insert into `account` values ('taylor@thu.edu.cn', '345', 'taylor', 'F', '1983-3-25');
+insert into `account` values ('taylor@pku.edu.cn', '345', 'taylor', 'F', '1983-3-25');
 insert into `friend` values ('wang@pku.edu.cn', 'taylor@pku.edu.cn');
+insert into `friend` values ('taylor@pku.edu.cn', 'wang@pku.edu.cn');
 insert into `message` values ('1', 'wang@pku.edu.cn', '2014-4-12 15:01:32', 'life is amazing');
 insert into `message` values ('2', 'wang@pku.edu.cn', '2014-4-13 13:01:43', 'a good day');
 insert into `comment` values ('1001', 'wang@pku.edu.cn', '1', '2014-5-23 10:09:56', 'I totally agree');

@@ -5,8 +5,9 @@
  */
 
 function setTextArea(replyUserName, messageID) {
-    document.getElementById(messageID).textContent = "Reply to " + replyUserName + ":";
-    document.getElementById(messageID).focus();    
+    $("#"+messageID).val("to " + replyUserName + ": ");        
+    var t=$("#"+messageID).val();
+    $("#"+messageID).val("").focus().val(t);
 }
 
 // handle event of submitting reply messages
@@ -30,6 +31,7 @@ function submitReply(messageID) {
                 };
 		strInput="submitReply.jsp?words="+strInput+"&messageID="+messageID;
 		strInput=encodeURI(strInput);		
+                strInput=encodeURI(strInput);		
 		xmlhttp.open("GET",strInput,true);
 		xmlhttp.send();		
 	} // end if clause
@@ -56,6 +58,7 @@ function submitMessage() {
                 };
 		strInput="submitMessage.jsp?words="+strInput;
 		strInput=encodeURI(strInput);		
+                strInput=encodeURI(strInput);		
 		xmlhttp.open("GET",strInput,true);
 		xmlhttp.send();		
 	} // end if clause

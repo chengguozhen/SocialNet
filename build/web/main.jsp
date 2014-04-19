@@ -19,9 +19,9 @@
         <script src="js/jquery.socialfeed.utility.js"></script>
         <script src="js/jquery.socialfeed.js"></script>
         <script src="js/reply.js"></script>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="./css/signin.css" rel="stylesheet">
+        <link href="./css/bootstrap.min.css" rel="stylesheet">        
+        <link href="./css/signin.css" rel="stylesheet">                   
+        <link href="./css/dashboard.css" rel="stylesheet">
         
         <style>
             /*This style is needed only for the plugin demo page. Do not use it in your projects*/
@@ -41,7 +41,29 @@
     </head>
     
     <body>
-        <h1>Welcome to WeFriend!</h1>        
+        
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">          
+          <a class="navbar-brand" href="">WeFriends</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="">Dashboard</a></li>
+            <li><a href="">Settings</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search Friends...">
+          </form>
+        </div>
+      </div>
+    </div>
+
+            
+        
+        <h2>Welcome to WeFriends!</h2>        
  <%
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
@@ -72,11 +94,12 @@
 
         <div class="container">
         <div class="col-xs-11 col-sm-11 col-md-11">
-            <textarea class="form-control" rows="4" name="message" id="message">Test</textarea>                        
+            <textarea class="form-control" rows="4" placeholder="Wanna say something?"
+                      name="message" id="message"></textarea>                        
         </div>        
         <div class="col-xs-8 col-sm-8 col-md-8"></div>
         <div class="col-xs-4 col-sm-4 col-md-4">
-        <button type="button" class="btn btn-lg btn-primary" onclick="submitMessage()">Publish</button>
+        <button type="button" class="btn btn-lg btn-danger" onclick="submitMessage()">Publish</button>
         </div>
             </div>
         
@@ -93,13 +116,14 @@
                 + "' and userID2 = `message`.userID and `account`.userID = `message`.userID) "
                 + "or (`message`.userID = '" + userID + "' and `account`.userID = `message`.userID)"
                 + "order by publishTime desc;";
+        stmt.executeQuery("SET NAMES UTF8");
         rs = stmt.executeQuery(sql);               
         while (rs.next()) {
 %>              
         <div class="social-feed-container" style="display: inline-block;">            
         <div class="social-feed-element"> 
             <a class="pull-left" href=""> 
-                <img class="media-object" src="img/profile_3_75sq_1325536697.jpg"> 
+                <img class="media-object" src="img/7.jpg"> 
             </a> 
             <div class="media-body"> 
                 <p>                    
@@ -138,6 +162,7 @@
                          + "' and `account`.userID = `comment`.userID "
                          + "order by publishTime desc";
                  System.out.println("query2: "+ query2);
+                 stmt2.executeQuery("SET NAMES UTF8");
                  ResultSet rs2 = stmt2.executeQuery(query2);
                  while (rs2.next()) {
 %>                
@@ -147,24 +172,15 @@
                         <% out.println(rs2.getString("replyUserName")); %>
                     </span>
                 <span class="muted">
-                    <% out.println(": " + rs2.getString("content") 
+                    <% out.println(rs2.getString("content") 
                        + " (" + rs2.getString("publishTime") + ")" ); %>                    
                 </span>
                        <span  style="text-align: right">
-                           <a id="<% out.print(rs2.getString("replyUserName")+"_"+rs.getString("messageID")); %>"
-                              onclick="setTextArea('<% out.print(rs2.getString("replyUserName")); %>',
+                           <a onclick="setTextArea('<% out.print(rs2.getString("replyUserName")); %>',
                               <% out.print(rs.getString("messageID")); %>)" href="javascript:void(0)">Reply</a></span>
-                </p>
-                <% } %>                
-<!--                <p>
-                    <span class="author-title">
-                        Taylor</span>
-                <span class="muted">: wow! that must be very interesting! wow! that must be very interesting!
-                    wow! that must be very interesting!wow! that must be very interesting!
-                    wow! that must be very interesting!wow! that must be very interesting!(2014-4-16 09:7:56)</span>
-                <span  style="text-align: right"><a href="">Reply</a></span>
-                </p>-->
+                </p>                     
                 </div>                
+                <% } %>           
                 </div>
         <br>&nbsp;<br>
                 <% } %>
