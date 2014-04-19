@@ -39,12 +39,12 @@ create table if not exists `comment` (
 );
 
 -- insert some data into databases for purpose of debugging
-insert into `account` values ('1', '123', 'wangliang', 'M', '1992-1-19');
-insert into `account` values ('2', '345', 'taylor', 'F', '1983-3-25');
-insert into `friend` values ('1', '2');
-insert into `message` values ('1', '1', '2014-4-12 15:01:32', 'life is amazing');
-insert into `message` values ('2', '1', '2014-4-13 13:01:43', 'a good day');
-insert into `comment` values ('1001', '1', '1', '2014-5-23 10:09:56', 'I totally agree');
+insert into `account` values ('wang@pku.edu.cn', '123', 'wangliang', 'M', '1992-1-19');
+insert into `account` values ('taylor@thu.edu.cn', '345', 'taylor', 'F', '1983-3-25');
+insert into `friend` values ('wang@pku.edu.cn', 'taylor@pku.edu.cn');
+insert into `message` values ('1', 'wang@pku.edu.cn', '2014-4-12 15:01:32', 'life is amazing');
+insert into `message` values ('2', 'wang@pku.edu.cn', '2014-4-13 13:01:43', 'a good day');
+insert into `comment` values ('1001', 'wang@pku.edu.cn', '1', '2014-5-23 10:09:56', 'I totally agree');
 
 
 

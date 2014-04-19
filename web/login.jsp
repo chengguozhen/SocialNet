@@ -31,8 +31,8 @@
 
       <form class="form-signin" role="form" action="loginResponse.jsp" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" class="form-control" placeholder="Email Address" required="" autofocus="">
-        <input type="password" class="form-control" placeholder="Password" required="">
+        <input type="email" class="form-control" placeholder="Email Address" required="" autofocus="" name="userID">
+        <input type="password" class="form-control" placeholder="Password" required="" name="passwd">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>

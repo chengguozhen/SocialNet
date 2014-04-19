@@ -21,26 +21,13 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-      
-    <script>
-    $(function() {
-    $( "#datepicker" ).datepicker();
-    });
-    </script>
-        
-    <script>
-    $(function() {
-        $('.btn-group').button();
-    });
-    </script>
+    <link rel="stylesheet" href="/resources/demos/style.css">       
     
-        <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="./css/signin.css" rel="stylesheet">
-    
+    <script src="./js/registerCheck.js"></script>
   </head>
  
 <body>
@@ -48,19 +35,23 @@
 
       <form class="form-signin" role="form" action="registerResponse.jsp" method="post">
         <h2 class="form-signin-heading">Register New Account</h2>
-        <input type="email" class="form-control" placeholder="Email Address" required="" autofocus="">
-        <input type="password" class="form-control" placeholder="Password" required="">
-        <input type="password" class="form-control" placeholder="Repeat Password" required=""> 
-        <input type="text" class="form-control" placeholder="Name" required="">
-        <input type="text" id="datepicker" class="form-control" placeholder="DD/MM/YY" required="">
+        <input type="email" class="form-control" placeholder="Email Address" 
+               required="" autofocus="" name="userID">
+        <input type="password" class="form-control" placeholder="Password" 
+               required="" name="passwd" id="passwd">
+        <input type="password" class="form-control" placeholder="Repeat Password" 
+               required="" name="passwd1" id ="passwd1"> 
+        <input type="text" class="form-control" placeholder="Name" required="" name="name">
+        <input type="text" id="datepicker" class="form-control" placeholder="DD/MM/YY" 
+               required="" name="birthday">
 
         <br>
         <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-default active">
-            <input type="radio" name="inputWalls" id="inputWalls" value="Male" checked>
+            <input type="radio" name="sex" id="sex" value="M" checked>
             Male </label>
         <label class="btn btn-default">
-            <input type="radio" name="inputWalls" id="inputWalls" value="Female">
+            <input type="radio" name="sex" id="sex" value="F">
             Female </label>    
         </div>
             
