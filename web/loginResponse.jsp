@@ -29,12 +29,13 @@
 					"root", "pkueecs2014");
 		Statement stmt = conn.createStatement();
 		stmt.executeQuery("SET NAMES UTF8");
-		String sql = "SELECT passwd FROM  `account` where userID='"+userID + "'";
+		String sql = "SELECT passwd,userName FROM  `account` where userID='"+userID + "'";
 		ResultSet rs = stmt.executeQuery(sql);
 		if (rs.next()){
 			if (rs.getString("passwd").equals(passwd)){
 				ok=1;
 				session.setAttribute("login","ok");
+                                session.setAttribute("userName", rs.getString("userName"));
 				session.setAttribute("userID",userID);
 				session.setMaxInactiveInterval(-1);
 			}

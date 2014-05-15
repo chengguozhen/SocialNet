@@ -3,6 +3,61 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function sendReq(id1, id2) {
+    $.ajax({
+     url : "sendRequest.jsp",
+     type : "post",
+     data : {"id1":id1, "id2":id2}
+    })
+    .done(function(){
+        window.location.reload();
+    })
+    .fail(function() { 
+        alert('Server Error!'); 
+    });
+}
+
+function cancelReq(id1, id2) {
+    $.ajax({
+     url : "cancelRequest.jsp",
+     type : "post",
+     data : {"id1":id1, "id2":id2}
+    })
+    .done(function(){
+        window.location.reload();
+    })
+    .fail(function() { 
+        alert('Server Error!'); 
+    });
+}
+
+function joinGroup(userID, groupID) {
+    $.ajax({
+            url : "joinGroup.jsp",
+            type : "post",
+            data : {"userID":userID, "groupID":groupID}
+        })
+       .done(function() {
+           window.location.reload(); 
+       })
+       .fail(function() {
+           alert('Server Error!');
+       });
+}
+
+function createGroup() {
+    var name = $('#createGroup').val();
+    $.ajax({
+        url : "createGroup.jsp",
+        type : "post",
+        data : {"groupName" : name}
+    }).done(function() { 
+        window.location.reload();
+    }).fail(function() {
+        alert("Server Error!");
+    });
+}
+
 
 function setTextArea(replyUserName, messageID) {
     $("#"+messageID).val("to " + replyUserName + ": ");        

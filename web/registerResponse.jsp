@@ -75,7 +75,7 @@
     if (ok==1){
 	out.println("<p>注册成功！！</p>");
 	out.println("<p>3秒后返回<a href=\"login.jsp\">登陆</a>页面！</p>");
-	String content=3+";URL="+"login.jsp";
+	String content=3+";URL="+"index.jsp";
 	response.setHeader("REFRESH",content); 
     }else{
 	out.println("<p>该用户名已占用！</p>");

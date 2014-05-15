@@ -1,24 +1,24 @@
-<!--
-    Document   : main
-    Created on : 2014-4-19, 11:19:01
-    Author     : Liang Wang
--->
+<%-- 
+    Document   : dashboard
+    Created on : 2014-5-15, 11:22:46
+    Author     : Administrator
+--%>
 
 <%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.sql.Statement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Main Page</title>        
         <link href="css/jquery.socialfeed.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-1.7.2.min.js"></script>
         <script src="js/jquery.socialfeed.utility.js"></script>
         <script src="js/jquery.socialfeed.js"></script>
-        <script src="js/reply.js"></script>        
+        <script src="js/reply.js"></script>
         <link href="./css/bootstrap.min.css" rel="stylesheet">        
         <link href="./css/signin.css" rel="stylesheet">                   
         <link href="./css/dashboard.css" rel="stylesheet">
@@ -49,7 +49,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="./dashboard.jsp"><% out.print(session.getAttribute("userName")); %></a></li>
+            <li><a href="./dashboard.jsp">Dashboard</a></li>
             <li><a href="./friends.jsp">Friends</a></li>
             <li><a href="./group.jsp">Group</a></li>
             <li><a href="./logout.jsp">Logout</a></li>
@@ -60,63 +60,34 @@
           </form>
         </div>
       </div>
-    </div>
-
-            
-        
-        <h2>Welcome to WeFriends!</h2>        
+    </div>        
+  
  <%
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
 	String userID=(String)session.getAttribute("userID");
         System.out.println(userID);
-	String driverName = "com.mysql.jdbc.Driver"; //驱动名称	
-	Class.forName(driverName).newInstance();
-	//链接数据库并保存到 conn 变量中
+	String driverName = "com.mysql.jdbc.Driver"; 
+	Class.forName(driverName).newInstance();	
 	Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
 					"root", "pkueecs2014");	
 	Statement stmt = conn.createStatement();	
 	stmt.executeQuery("SET NAMES UTF8");		
 	Statement stmt2 = conn.createStatement();	
 	stmt2.executeQuery("SET NAMES UTF8");	
-	String sql = "select userName from `account` where userID = '"+userID + "';";
-        System.out.println(sql);
-        ResultSet rs = stmt.executeQuery(sql);
-        String userName = "";
-        if (rs.next()) {
-           userName = rs.getString(1);
-        }
-        System.out.println("Current user: " + userName);
-        if (userName.length() == 0) { 
-//          should not happen if the code has no bug   
-            out.println("alert(\"something wrong... cannot find current user\")");
-        }
-%>
-
-        <div class="container">
-        <div class="col-xs-11 col-sm-11 col-md-11">
-            <textarea class="form-control" rows="4" placeholder="Wanna say something?"
-                      name="message" id="message"></textarea>                        
-        </div>        
-        <div class="col-xs-8 col-sm-8 col-md-8"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4">
-        <button type="button" class="btn btn-lg btn-danger" onclick="submitMessage()">Publish</button>
-        </div>
-            </div>
+	String sql = "";        
+        ResultSet rs = null;
+        String userName = (String)session.getAttribute("userName");
+%>        
         
-        <hr width="700" align="center"/>
-        
-        <div class="container">
-            <!--<h3 class="muted">social - feed</h3>-->
-                 
+        <hr width="700" align="center"/>       
+        <br><br>
 <%
 //      used to retrieve corresponding messages
         sql = "select distinct messageID, `message`.userID as userID, publishTime, content, userName "
-                + "from `friend`, `message`, `account`"
-                + "where (userID1 ='" + userID
-                + "' and userID2 = `message`.userID and `account`.userID = `message`.userID) "
-                + "or (`message`.userID = '" + userID + "' and `account`.userID = `message`.userID)"
-                + "order by publishTime desc;";
+                + "from `message`, `account` "
+                + "where `message`.userID = '" + userID + "' and `account`.userID = `message`.userID"
+                + " order by publishTime desc;";
         stmt.executeQuery("SET NAMES UTF8");
         rs = stmt.executeQuery(sql);               
         while (rs.next()) {
@@ -161,7 +132,7 @@
                          + " from `account`, `comment` "
                          + "where `comment`.messageID = '"+rs.getString("messageID")
                          + "' and `account`.userID = `comment`.userID "
-                         + "order by publishTime desc";
+                         + "order by publishTime desc;";
                  System.out.println("query2: "+ query2);
                  stmt2.executeQuery("SET NAMES UTF8");
                  ResultSet rs2 = stmt2.executeQuery(query2);

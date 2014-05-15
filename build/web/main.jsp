@@ -18,7 +18,7 @@
         <script src="js/jquery-1.7.2.min.js"></script>
         <script src="js/jquery.socialfeed.utility.js"></script>
         <script src="js/jquery.socialfeed.js"></script>
-        <script src="js/reply.js"></script>
+        <script src="js/reply.js"></script>        
         <link href="./css/bootstrap.min.css" rel="stylesheet">        
         <link href="./css/signin.css" rel="stylesheet">                   
         <link href="./css/dashboard.css" rel="stylesheet">
@@ -45,17 +45,18 @@
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">          
-          <a class="navbar-brand" href="">WeFriends</a>
+          <a class="navbar-brand" href="./main.jsp">WeFriends</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Dashboard</a></li>
-            <li><a href="">Settings</a></li>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Help</a></li>
+              <li><a href="./dashboard.jsp"><% out.print(session.getAttribute("userName")); %></a></li>
+            <li><a href="./friends.jsp">Friends</a></li>
+            <li><a href="./group.jsp">Group</a></li>
+            <li><a href="./logout.jsp">Logout</a></li>
+            <li><a href=""></a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search Friends...">
+            <form class="navbar-form navbar-right" action="searchResponse.jsp" method="get">
+              <input type="text" class="form-control" placeholder="Search Friends..." id="search" name="search">
           </form>
         </div>
       </div>
@@ -123,7 +124,7 @@
         <div class="social-feed-container" style="display: inline-block;">            
         <div class="social-feed-element"> 
             <a class="pull-left" href=""> 
-                <img class="media-object" src="img/7.jpg"> 
+                <img class="media-object" src="img/<% out.print(Math.abs(rs.getString("userID").hashCode())%300); %>.jpg"> 
             </a> 
             <div class="media-body"> 
                 <p>                    
