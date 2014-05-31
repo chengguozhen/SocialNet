@@ -52,7 +52,7 @@
     }else{
 	out.println("用户名或密码错误！");
 //      the integer indicates the time delay for refreshing page
-	String content=5+";URL="+"index.jsp";
+	String content=2+";URL="+"index.jsp";
 	response.setHeader("REFRESH",content); 
     }
     %>

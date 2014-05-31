@@ -19,6 +19,10 @@
         <script src="js/jquery.socialfeed.utility.js"></script>
         <script src="js/jquery.socialfeed.js"></script>
         <script src="js/reply.js"></script>        
+        <script lang='javascript'>
+//            check if there is new message periodically
+            timeId = setInterval("check();",3000);
+        </script>
         <link href="./css/bootstrap.min.css" rel="stylesheet">        
         <link href="./css/signin.css" rel="stylesheet">                   
         <link href="./css/dashboard.css" rel="stylesheet">
@@ -69,10 +73,10 @@
 	response.setCharacterEncoding("UTF-8");
 	request.setCharacterEncoding("UTF-8");
 	String userID=(String)session.getAttribute("userID");
+        session.setAttribute("last", String.valueOf(System.currentTimeMillis()));
         System.out.println(userID);
-	String driverName = "com.mysql.jdbc.Driver"; //驱动名称	
-	Class.forName(driverName).newInstance();
-	//链接数据库并保存到 conn 变量中
+	String driverName = "com.mysql.jdbc.Driver";
+	Class.forName(driverName).newInstance();	
 	Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
 					"root", "pkueecs2014");	
 	Statement stmt = conn.createStatement();	
@@ -105,7 +109,9 @@
             </div>
         
         <hr width="700" align="center"/>
-        
+        <div id="new_message" > 
+        </div>
+        <br>
         <div class="container">
             <!--<h3 class="muted">social - feed</h3>-->
                  
@@ -188,5 +194,11 @@
         </div>        
         </div>
         
+        
+        <br><br><br>
+        <div class="footer">
+            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>      
+            <!--<li><a href="../about/">About</a></li>-->      
+        </div>
     </body>
 </html>

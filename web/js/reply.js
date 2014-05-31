@@ -31,6 +31,26 @@ function cancelReq(id1, id2) {
     });
 }
 
+function check() {
+    $.ajax({
+        url : "checkNewMessage.jsp",
+        type : "get"        
+    }).done(function(e) {
+//        alert("content: "+e+"end length: "+e.trim().length);        
+        if(e.trim() == "ok") {
+//            alert("ok");
+//            window.location.reload();
+            $("#new_message")[0].innerHTML = '<a onclick="window.location.reload();" href="javascript:void(0)">You have new messages.</a>';
+        }
+        else {
+//            alert("no new message");
+            $("#new_message")[0].innerHTML = '';
+        }
+    }).fail(function(){
+        alert('Server Error!');
+    });
+}
+
 function joinGroup(userID, groupID) {
     $.ajax({
             url : "joinGroup.jsp",
@@ -58,6 +78,9 @@ function createGroup() {
     });
 }
 
+function register() {
+    window.location = "register.jsp";
+}
 
 function setTextArea(replyUserName, messageID) {
     $("#"+messageID).val("to " + replyUserName + ": ");        

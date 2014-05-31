@@ -14,6 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="./img/favicon.ico">
+    <script src="./js/reply.js"></script>
 
     <title>Signin</title>
 
@@ -36,18 +37,26 @@
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="col-xs-12 col-sm-12 col-md-12">
         <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
 	</div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-	<button type="button" class="btn btn-lg btn-primary btn-block" onclick="location.href='register.jsp'">Register</button>
-	</div>
+<!--        <div class="col-xs-6 col-sm-6 col-md-6">
+	<button type="button" class="btn btn-lg btn-primary btn-block" onclick="register.jsp">Register</button>
+	</div>-->
         <!--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
         <!--<button class="btn btn-lg btn-primary btn-block">Register</button>-->
       </form>
-
+        <br><br>
+        <div align="center">
+            no account? click here to<input type="button" class="btn-link"  onclick="register()" value="register">.
+        </div>
     </div> <!-- /container -->
-
+    
+    <br><br><br>    
+        <div class="footer" align="center">
+            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>      
+            <!--<li><a href="../about/">About</a></li>-->      
+        </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

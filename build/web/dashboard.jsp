@@ -21,8 +21,7 @@
         <script src="js/reply.js"></script>
         <link href="./css/bootstrap.min.css" rel="stylesheet">        
         <link href="./css/signin.css" rel="stylesheet">                   
-        <link href="./css/dashboard.css" rel="stylesheet">
-        
+        <link href="./css/dashboard.css" rel="stylesheet">      
         <style>
             /*This style is needed only for the plugin demo page. Do not use it in your projects*/
             .credits{text-align:center;padding:20px;margin-top:10px;font-size:12px;}
@@ -158,6 +157,10 @@
                 <% } %>
         </div>        
         </div>
-        
+        <br><br><br>
+        <div class="footer">
+            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>      
+            <!--<li><a href="../about/">About</a></li>-->      
+        </div>
     </body>
 </html>

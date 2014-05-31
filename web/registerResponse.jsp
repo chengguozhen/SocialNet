@@ -74,7 +74,7 @@
     <%
     if (ok==1){
 	out.println("<p>注册成功！！</p>");
-	out.println("<p>3秒后返回<a href=\"login.jsp\">登陆</a>页面！</p>");
+	out.println("<p>3秒后返回<a href=\"index.jsp\">登陆</a>页面！</p>");
 	String content=3+";URL="+"index.jsp";
 	response.setHeader("REFRESH",content); 
     }else{
@@ -84,5 +84,6 @@
 	response.setHeader("REFRESH",content); 
     }
     %>
+    
     </body>
 </html>

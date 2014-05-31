@@ -65,5 +65,10 @@
       </form>
 
     </div>
+    <br><br><br>
+        <div class="footer">
+            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>      
+            <!--<li><a href="../about/">About</a></li>-->      
+        </div>
 </body>
 </html>
