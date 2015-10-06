@@ -13,20 +13,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Main Page</title>        
+        <title>Main Page</title>
         <link href="css/jquery.socialfeed.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-1.7.2.min.js"></script>
         <script src="js/jquery.socialfeed.utility.js"></script>
         <script src="js/jquery.socialfeed.js"></script>
-        <script src="js/reply.js"></script>        
+        <script src="js/reply.js"></script>
         <script lang='javascript'>
 //            check if there is new message periodically
             timeId = setInterval("check();",3000);
         </script>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">        
-        <link href="./css/signin.css" rel="stylesheet">                   
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/signin.css" rel="stylesheet">
         <link href="./css/dashboard.css" rel="stylesheet">
-        
+
         <style>
             /*This style is needed only for the plugin demo page. Do not use it in your projects*/
             .credits{text-align:center;padding:20px;margin-top:10px;font-size:12px;}
@@ -43,12 +43,12 @@
             .container {display:inline-block;width:600px;}
         </style>
     </head>
-    
+
     <body>
-        
+
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">          
+        <div class="navbar-header">
           <a class="navbar-brand" href="./main.jsp">WeFriends</a>
         </div>
         <div class="navbar-collapse collapse">
@@ -66,24 +66,24 @@
       </div>
     </div>
 
-            
-        
-        <h2>Welcome to WeFriends!</h2>        
+
+
+        <h2>Welcome to WeFriends!</h2>
  <%
-	response.setCharacterEncoding("UTF-8");
-	request.setCharacterEncoding("UTF-8");
-	String userID=(String)session.getAttribute("userID");
+    response.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding("UTF-8");
+    String userID=(String)session.getAttribute("userID");
         session.setAttribute("last", String.valueOf(System.currentTimeMillis()));
         System.out.println(userID);
-	String driverName = "com.mysql.jdbc.Driver";
-	Class.forName(driverName).newInstance();	
-	Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
-					"root", "pkueecs2014");	
-	Statement stmt = conn.createStatement();	
-	stmt.executeQuery("SET NAMES UTF8");		
-	Statement stmt2 = conn.createStatement();	
-	stmt2.executeQuery("SET NAMES UTF8");	
-	String sql = "select userName from `account` where userID = '"+userID + "';";
+    String driverName = "com.mysql.jdbc.Driver";
+    Class.forName(driverName).newInstance();
+    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
+                    "root", "secret");
+    Statement stmt = conn.createStatement();
+    stmt.executeQuery("SET NAMES UTF8");
+    Statement stmt2 = conn.createStatement();
+    stmt2.executeQuery("SET NAMES UTF8");
+    String sql = "select userName from `account` where userID = '"+userID + "';";
         System.out.println(sql);
         ResultSet rs = stmt.executeQuery(sql);
         String userName = "";
@@ -91,8 +91,8 @@
            userName = rs.getString(1);
         }
         System.out.println("Current user: " + userName);
-        if (userName.length() == 0) { 
-//          should not happen if the code has no bug   
+        if (userName.length() == 0) {
+//          should not happen if the code has no bug
             out.println("alert(\"something wrong... cannot find current user\")");
         }
 %>
@@ -100,21 +100,21 @@
         <div class="container">
         <div class="col-xs-11 col-sm-11 col-md-11">
             <textarea class="form-control" rows="4" placeholder="Wanna say something?"
-                      name="message" id="message"></textarea>                        
-        </div>        
+                      name="message" id="message"></textarea>
+        </div>
         <div class="col-xs-8 col-sm-8 col-md-8"></div>
         <div class="col-xs-4 col-sm-4 col-md-4">
         <button type="button" class="btn btn-lg btn-danger" onclick="submitMessage()">Publish</button>
         </div>
             </div>
-        
+
         <hr width="700" align="center"/>
-        <div id="new_message" > 
+        <div id="new_message" >
         </div>
         <br>
         <div class="container">
             <!--<h3 class="muted">social - feed</h3>-->
-                 
+
 <%
 //      used to retrieve corresponding messages
         sql = "select distinct messageID, `message`.userID as userID, publishTime, content, userName "
@@ -124,39 +124,39 @@
                 + "or (`message`.userID = '" + userID + "' and `account`.userID = `message`.userID)"
                 + "order by publishTime desc;";
         stmt.executeQuery("SET NAMES UTF8");
-        rs = stmt.executeQuery(sql);               
+        rs = stmt.executeQuery(sql);
         while (rs.next()) {
-%>              
-        <div class="social-feed-container" style="display: inline-block;">            
-        <div class="social-feed-element"> 
-            <a class="pull-left" href=""> 
-                <img class="media-object" src="img/<% out.print(Math.abs(rs.getString("userID").hashCode())%300); %>.jpg"> 
-            </a> 
-            <div class="media-body"> 
-                <p>                    
+%>
+        <div class="social-feed-container" style="display: inline-block;">
+        <div class="social-feed-element">
+            <a class="pull-left" href="">
+                <img class="media-object" src="img/<% out.print(Math.abs(rs.getString("userID").hashCode())%300); %>.jpg">
+            </a>
+            <div class="media-body">
+                <p>
                     <span class="author-title">
                         <% out.println(rs.getString("userName")); %>
-                    </span> 
+                    </span>
                         <span class="muted">
                             <% out.println(rs.getString("publishTime")); %>
-                        </span>             
-                </p> 
+                        </span>
+                </p>
                 <div> <p class="social-feed-text">
-                        <% out.println(rs.getString("content"));  %>                        
-                      </p> 
-                </div> 
+                        <% out.println(rs.getString("content"));  %>
+                      </p>
+                </div>
             </div>
                         <div  style="text-align: right">
                             <a onclick="setTextArea('<% out.print(rs.getString("userName")); %>',
                                 <%out.print(rs.getString("messageID")); %>)"
                               href="javascript:void(0)">Reply</a></div>
-                <div class="container">                
+                <div class="container">
                 <div class="col-xs-11 col-sm-11 col-md-11">
                     <textarea class="form-control" rows="1" id="<% out.print(rs.getString("messageID")); %>"
-                              ></textarea>                    
+                              ></textarea>
                 </div>
                 <div class="col-xs-1 col-sm-1 col-md-1">
-                    <button type="button" class="btn" 
+                    <button type="button" class="btn"
                             onclick="submitReply('<% out.print(rs.getString("messageID")); %>')">
                     send</button>
                 </div>
@@ -172,33 +172,33 @@
                  stmt2.executeQuery("SET NAMES UTF8");
                  ResultSet rs2 = stmt2.executeQuery(query2);
                  while (rs2.next()) {
-%>                
+%>
                 <div name="<% out.print(rs.getString("messageID")+"_comments"); %>" >
                 <p>
                     <span class="author-title">
                         <% out.println(rs2.getString("replyUserName")); %>
                     </span>
                 <span class="muted">
-                    <% out.println(rs2.getString("content") 
-                       + " (" + rs2.getString("publishTime") + ")" ); %>                    
+                    <% out.println(rs2.getString("content")
+                       + " (" + rs2.getString("publishTime") + ")" ); %>
                 </span>
                        <span  style="text-align: right">
                            <a onclick="setTextArea('<% out.print(rs2.getString("replyUserName")); %>',
                               <% out.print(rs.getString("messageID")); %>)" href="javascript:void(0)">Reply</a></span>
-                </p>                     
-                </div>                
-                <% } %>           
+                </p>
+                </div>
+                <% } %>
                 </div>
         <br>&nbsp;<br>
                 <% } %>
-        </div>        
         </div>
-        
-        
+        </div>
+
+
         <br><br><br>
         <div class="footer">
-            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>      
-            <!--<li><a href="../about/">About</a></li>-->      
+            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>
+            <!--<li><a href="../about/">About</a></li>-->
         </div>
     </body>
 </html>

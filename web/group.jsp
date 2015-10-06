@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : group
     Created on : 2014-5-15, 11:23:20
     Author     : Administrator
@@ -13,16 +13,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Main Page</title>        
+        <title>Main Page</title>
         <link href="css/jquery.socialfeed.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-1.7.2.min.js"></script>
         <script src="js/jquery.socialfeed.utility.js"></script>
         <script src="js/jquery.socialfeed.js"></script>
         <script src="js/reply.js"></script>
-        <link href="./css/bootstrap.min.css" rel="stylesheet">        
-        <link href="./css/signin.css" rel="stylesheet">                   
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/signin.css" rel="stylesheet">
         <link href="./css/dashboard.css" rel="stylesheet">
-        
+
         <style>
             /*This style is needed only for the plugin demo page. Do not use it in your projects*/
             .credits{text-align:center;padding:20px;margin-top:10px;font-size:12px;}
@@ -39,12 +39,12 @@
             .container {display:inline-block;width:600px;}
         </style>
     </head>
-    
+
     <body>
-        
+
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">          
+        <div class="navbar-header">
           <a class="navbar-brand" href="./main.jsp">WeFriends</a>
         </div>
         <div class="navbar-collapse collapse">
@@ -61,26 +61,26 @@
         </div>
       </div>
     </div>
-        
+
  <%
         response.setCharacterEncoding("UTF-8");
-	request.setCharacterEncoding("UTF-8");
-	String userID=(String)session.getAttribute("userID");
+    request.setCharacterEncoding("UTF-8");
+    String userID=(String)session.getAttribute("userID");
         System.out.println(userID);
-	String driverName = "com.mysql.jdbc.Driver"; //驱动名称	
-	Class.forName(driverName).newInstance();
-	//链接数据库并保存到 conn 变量中
-	Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
-					"root", "pkueecs2014");	
-	Statement stmt = conn.createStatement();	
-        Statement stmt2 = conn.createStatement();	
-	stmt.executeQuery("SET NAMES UTF8");			
-	String sql = "select groupID, groupName from `group`";
+    String driverName = "com.mysql.jdbc.Driver"; //驱动名称
+    Class.forName(driverName).newInstance();
+    //链接数据库并保存到 conn 变量中
+    Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
+                    "root", "secret");
+    Statement stmt = conn.createStatement();
+        Statement stmt2 = conn.createStatement();
+    stmt.executeQuery("SET NAMES UTF8");
+    String sql = "select groupID, groupName from `group`";
         System.out.println(sql);
-        ResultSet rs = stmt.executeQuery(sql); 
-        ResultSet rs2 = null; 
+        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs2 = null;
  %>
-        
+
         <br><br><br>
         <div style="float:left; width: 44%;"><hr/></div>
         <div style="float:right; width: 44%;"><hr/></div>
@@ -88,21 +88,21 @@
         <!--a list of groups-->
         <div class="social-feed-container" style="display: inline-block;">
             <% while(rs.next()){ %>
-            <div class="social-feed-element"> 
-            <a class="pull-left" href=""> 
-                <img class="media-object" src="img/<% out.print(Math.abs(rs.getString("groupID").hashCode())%300); %>.jpg"> 
-            </a> 
-            <div class="media-body"> 
-                <p>                    
-                    <span class="author-title"><% out.print(rs.getString("groupName")); %> Group</span>     
-                </p> 
-                <div> <p class="social-feed-text">Members: 
-                        <%        
-                            			
-                            sql = "select userName from `account`, `groupInfo` where groupID='" 
+            <div class="social-feed-element">
+            <a class="pull-left" href="">
+                <img class="media-object" src="img/<% out.print(Math.abs(rs.getString("groupID").hashCode())%300); %>.jpg">
+            </a>
+            <div class="media-body">
+                <p>
+                    <span class="author-title"><% out.print(rs.getString("groupName")); %> Group</span>
+                </p>
+                <div> <p class="social-feed-text">Members:
+                        <%
+
+                            sql = "select userName from `account`, `groupInfo` where groupID='"
                                     + rs.getString("groupID") + "' and `account`.userID = `groupInfo`.userID;";
                             System.out.println(sql);
-                            rs2 = stmt2.executeQuery(sql); 
+                            rs2 = stmt2.executeQuery(sql);
                             String result = "";
                             while(rs2.next()) {
                                 result += rs2.getString("userName") + ",";
@@ -113,8 +113,8 @@
                             else { result = "No Member Yet."; }
                             out.print(result);
                         %>
-                        </p> 
-                </div>            
+                        </p>
+                </div>
                 <div style="text-align: right" id="">
                        <%
                             sql = "select * from `groupInfo` where groupID = '"
@@ -127,39 +127,39 @@
                               onclick="<% out.print("joinGroup('" + userID + "','"+ rs.getString("groupID") + "')"); %>">
                                 Join Now!
                             </button>
-                        <% } 
+                        <% }
                             else {
                         %>
                         <button class="btn btn-group"
                               onclick="">I am a member</button>
                         <% } %>
-                        
+
                 </div>
             </div>
-            <div class="container">                
-                <div class="col-xs-12 col-sm-12 col-md-12"></div>                
-            </div>           
+            <div class="container">
+                <div class="col-xs-12 col-sm-12 col-md-12"></div>
+            </div>
             </div>
             <% } %>
             <br><br>
-            <div class="container">                
+            <div class="container">
                 <div class="col-xs-10 col-sm-10 col-md-10">
-                    <textarea class="form-control" rows="1" id="createGroup" placeholder="Enter Group Name Here"></textarea>                    
+                    <textarea class="form-control" rows="1" id="createGroup" placeholder="Enter Group Name Here"></textarea>
                 </div>
                 <div class="col-xs-1 col-sm-1 col-md-1">
-                    <button type="button" class="btn btn-danger" 
+                    <button type="button" class="btn btn-danger"
                             onclick="createGroup()">
                     New Group</button>
                 </div>
              </div>
-            
+
         </div>
-            
+
           <br><br><br>
         <div class="footer">
-            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>      
-            <!--<li><a href="../about/">About</a></li>-->      
-        </div> 
-            
+            <p>built by <a href="http://weibo.com/intfloat">Liang Wang</a>, Jia Kong, Die Duan, 2014.5</p>
+            <!--<li><a href="../about/">About</a></li>-->
+        </div>
+
     </body>
 </html>

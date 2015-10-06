@@ -61,7 +61,7 @@
         <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
         <p></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-	<!--</div>-->        
+    <!--</div>-->        
       </form>
 
     </div>

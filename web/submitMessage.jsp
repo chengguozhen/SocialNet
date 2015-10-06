@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : submitMessage
     Created on : 2014-4-19, 21:03:26
     Author     : Liang Wang
@@ -18,27 +18,27 @@
     </head>
     <body>
         <%
-//	int ok=0;
-    	response.setCharacterEncoding("UTF-8");
-    	request.setCharacterEncoding("UTF-8");
-	if(request.getParameter("words")!=null){
-		String content= java.net.URLDecoder.decode(request.getParameter("words"),"UTF-8");//获取请求参数  
-		String userID=(String)session.getAttribute("userID");
-		String publishTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()); 
+//  int ok=0;
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+    if(request.getParameter("words")!=null){
+        String content= java.net.URLDecoder.decode(request.getParameter("words"),"UTF-8");//获取请求参数
+        String userID=(String)session.getAttribute("userID");
+        String publishTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 
-		String driverName = "com.mysql.jdbc.Driver"; //驱动名称		
-		Class.forName(driverName).newInstance();
-		Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
-					"root", "pkueecs2014");		
-		Statement stmt = conn.createStatement();
-		stmt.executeQuery("SET NAMES UTF8");
-		String sql = "INSERT INTO  `message` (userID,publishTime,content) VALUES ('"
+        String driverName = "com.mysql.jdbc.Driver"; //驱动名称
+        Class.forName(driverName).newInstance();
+        Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/wefriends",
+                    "root", "secret");
+        Statement stmt = conn.createStatement();
+        stmt.executeQuery("SET NAMES UTF8");
+        String sql = "INSERT INTO  `message` (userID,publishTime,content) VALUES ('"
                          + userID + "','" + publishTime + "','"+content+"')";
-		System.out.println(sql);
-		stmt.execute(sql);		
-		conn.close();
-		stmt.close();
-	}	
+        System.out.println(sql);
+        stmt.execute(sql);
+        conn.close();
+        stmt.close();
+    }
 %>
     </body>
 </html>
